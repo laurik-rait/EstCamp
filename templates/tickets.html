@@ -1,0 +1,21 @@
+<h1>EstCamp - Ticket Availability</h1>
+<a href="/">Back to home</a>
+<br/>
+<br/>
+<br/>
+<br/>
+
+{% for type, count in available_tickets.items %}
+    <div>
+        <b>{{ type.name }} - {{ type.price }}€</b>
+        <p>{{ type.description }}</p>
+        {% if count < 1 %}
+            <p>Sold out!</p>
+        {% else %}
+            <p>There are currently {{ count }} tickets available!</p>
+            <a href="/reserve"><i>Reserve Now</i></a>
+        {% endif %}
+    </div>
+    <br/>
+    <br/>
+{% endfor %}

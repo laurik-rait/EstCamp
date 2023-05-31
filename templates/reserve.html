@@ -1,0 +1,30 @@
+<h1>EstCamp - Reserve tickets</h1>
+<a href="/">Back to home</a> / <a href="/tickets">See available tickets</a>
+<br/>
+<br/>
+<br/>
+<br/>
+
+{% if reservation %}
+  <div>
+    <p><b>Your reservation has been booked!</b></p>
+    <p>Name: {{ reservation.name }}</p>
+    <p>Email: {{ reservation.email }}</p>
+    <p>Ticket type: {{ reservation.type }}</p>
+    <p>Ticket cost: {{ reservation.type.price }}</p>
+    <br/>
+    <p>Please make the payment to Robert Kuusk at EE1111111111111.</p>
+    <br/>
+    <p>To cancel your reservation, please reach out via email.</p>
+  </div>
+{% else %}
+  <div>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <table border="1">
+        {{ form }}
+      </table>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+{% endif %}
