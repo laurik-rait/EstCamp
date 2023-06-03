@@ -16,7 +16,7 @@
     <div>
       <p><b>{% trans "Your reservation has been booked!" %}</b>
         <p>
-          {% trans "Name" %}: {{ reservation.name }}<br/>
+          {% trans "Name(s)" %}: {{ reservation.name }}<br/>
           {% trans "E-mail" %}: {{ reservation.email }}<br/>
           {% if LANGUAGE_CODE == 'et' %}
             {% trans "Ticket type" %}: {{ reservation.type.name_et }}<br/>
@@ -35,7 +35,7 @@
         {% csrf_token %}
         <table style="text-align: right;">
           <tr>
-            <td><label for="{{ form.name.id_for_label }}">{% trans "Name" %}: </label></td>
+            <td><label for="{{ form.name.id_for_label }}">{% trans "Name(s)" %}: </label></td>
             <td>{{ form.name }}</td>
             <td>{{ form.name.errors }}</td>
           </tr>

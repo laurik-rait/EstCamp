@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-03 14:10+0000\n"
+"POT-Creation-Date: 2023-06-03 15:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr "Koduleht"
 msgid "There are no more tickets available for this type."
 msgstr "Alles on %(count)s piletit!"
 
-#: templates/index.html:10 templates/reserve.html:11
+#: templates/index.html:11 templates/reserve.html:11
 msgid "See available tickets"
 msgstr "Kuva saadaval olevaid pileteid"
 
@@ -48,7 +48,7 @@ msgstr "Reservatsioonid"
 msgid "Reserve tickets"
 msgstr "Reserveeri pileteid"
 
-#: templates/reserve.html:11 templates/tickets.html:10
+#: templates/reserve.html:11 templates/tickets.html:11
 msgid "Back to home"
 msgstr "Tagasi kodulehele"
 
@@ -56,54 +56,60 @@ msgstr "Tagasi kodulehele"
 msgid "Your reservation has been booked!"
 msgstr "Su reservatsioon on kinnitatud!"
 
-#: templates/reserve.html:19 templates/reserve.html:34
-msgid "Name"
-msgstr "Nimi"
+#: templates/reserve.html:19 templates/reserve.html:38
+#, fuzzy
+#| msgid "Name"
+msgid "Name(s)"
+msgstr "Nimi/nimed"
 
-#: templates/reserve.html:20 templates/reserve.html:38
+#: templates/reserve.html:20 templates/reserve.html:43
 msgid "E-mail"
 msgstr "E-mail"
 
-#: templates/reserve.html:21 templates/reserve.html:42
+#: templates/reserve.html:22 templates/reserve.html:24
+#: templates/reserve.html:49
 msgid "Ticket type"
 msgstr "Pileti tüüp"
 
-#: templates/reserve.html:22
+#: templates/reserve.html:26
 msgid "Ticket cost"
 msgstr "Pileti hind"
 
-#: templates/reserve.html:24
+#: templates/reserve.html:28
 msgid "Please make the payment to Robert Mattias Kuusk • EE207700771005346153"
 msgstr "Palun tee makse kontole  Robert Mattias Kuusk • EE207700771005346153"
 
-#: templates/reserve.html:25
+#: templates/reserve.html:29
 msgid "In the description, please include your full name(s)."
 msgstr "Makse kirjeldusse kirjuta oma täisnimi/-nimed."
 
-#: templates/reserve.html:57 templates/reserve.html:67
+#: templates/reserve.html:65
 msgid "Submit"
 msgstr "Sisesta"
 
-#: templates/tickets.html:4
+#: templates/tickets.html:5
 msgid "Tickets"
 msgstr "Piletid"
 
-#: templates/tickets.html:9
+#: templates/tickets.html:10
 msgid "Ticket availability"
 msgstr "Pileti saadavus"
 
-#: templates/tickets.html:21
+#: templates/tickets.html:32
 msgid "Sold out."
 msgstr "Välja müüdud."
 
-#: templates/tickets.html:23
+#: templates/tickets.html:34
 #, python-format
 msgid "There are currently %(count)s tickets available!"
 msgstr "Alles on %(count)s piletit!"
 
-#: templates/tickets.html:25
+#: templates/tickets.html:36
 msgid "Reserve now"
 msgstr "Reserveeri nüüd"
+
+#~ msgid "Name"
+#~ msgstr "Nimi"
 
 #, fuzzy
 #~| msgid "Estonian"
@@ -114,11 +120,6 @@ msgstr "Reserveeri nüüd"
 #~| msgid "Reservations"
 #~ msgid "Estonian description"
 #~ msgstr "Reservatsioonid"
-
-#, fuzzy
-#~| msgid "Name"
-#~ msgid "Name(s)"
-#~ msgstr "Nimi/nimed"
 
 #~ msgid "Price"
 #~ msgstr "Hind"
