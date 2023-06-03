@@ -57,8 +57,6 @@ msgid "Your reservation has been booked!"
 msgstr "Su reservatsioon on kinnitatud!"
 
 #: templates/reserve.html:19 templates/reserve.html:38
-#, fuzzy
-#| msgid "Name"
 msgid "Name(s)"
 msgstr "Nimi/nimed"
 
