@@ -1,5 +1,5 @@
 from django.db import models
-from precise_bbcode.fields import BBCodeTextField
+from django.utils.translation import gettext as _
 
 
 class Homepage(models.Model):
@@ -8,6 +8,7 @@ class Homepage(models.Model):
     change what is written on the front page through Django admin.
     """
     text = models.TextField()
+    text_et = models.TextField("Estonian text", default="")
 
     def __str__(self):
-        return "Homepage"
+        return _("Homepage")

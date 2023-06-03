@@ -1,21 +1,43 @@
-<h1>EstCamp - Ticket Availability</h1>
-<a href="/">Back to home</a>
-<br/>
-<br/>
-<br/>
-<br/>
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
-{% for type, count in available_tickets.items %}
-    <div>
-        <b>{{ type.name }} - {{ type.price }}€</b>
-        <p>{{ type.description }}</p>
-        {% if count < 1 %}
-            <p>Sold out!</p>
-        {% else %}
-            <p>There are currently {{ count }} tickets available!</p>
-            <a href="/reserve"><i>Reserve Now</i></a>
-        {% endif %}
-    </div>
+<head>
+    <title>EstCamp - {% trans "Tickets" %}</title>
+</head>
+
+<body>
+    <a href="/et/tickets">🇪🇪 Eesti</a> / <a href="/en/tickets">🇬🇧 English</a>
+    <h1>EstCamp - {% trans "Ticket availability" %}</h1>
+    <a href="{% url 'home' %}">{% trans "Back to home" %}</a>
     <br/>
     <br/>
-{% endfor %}
+
+    {% for type, count in available_tickets.items %}
+        <div>
+            <b>
+                {% if LANGUAGE_CODE == 'et' %}
+                    {{ type.name_et }}
+                {% else %}
+                    {{ type.name }}
+                {% endif %} - {{ type.price }}€
+            </b>
+            <div>
+                {% if LANGUAGE_CODE == 'et' %}
+                    {{ type.description_et }}
+                {% else %}
+                    {{ type.description }}
+                {% endif %}
+                <p></p>
+                {% if count < 1 %}
+                    <i>{% trans "Sold out." %}</i>
+                {% else %}
+                    <i>{% blocktrans %}There are currently {{ count }} tickets available!{% endblocktrans %}</i>
+                    <br/>
+                    <a href="{% url 'reservation' type_id=type.id %}"><i>{% trans "Reserve now" %}</i></a>
+                {% endif %}
+            </div>
+        </div>
+        <br/>
+        <br/>
+    {% endfor %}
+</body>

@@ -1,7 +1,8 @@
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn -b 0.0.0.0:8000 --capture-output --enable-stdio-inheritance estcamp.wsgi
     volumes:
       - .:/code
     ports:

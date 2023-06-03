@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import path
 
@@ -23,8 +24,12 @@ from reservations.views import reservation_view
 admin.site.site_header = 'EstCamp Administration'
 
 urlpatterns = [
+    path('admin/', admin.site.urls, name='admin'),
+]
+
+urlpatterns += i18n_patterns(
     path('', home_view, name='home'),
     path('tickets/', tickets_view, name='tickets'),
     path('reserve/', reservation_view, name='reservation'),
-    path('admin/', admin.site.urls, name='admin'),
-]
+    path('reserve/<int:type_id>', reservation_view, name='reservation'),
+)

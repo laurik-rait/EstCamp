@@ -1,9 +1,22 @@
-<h1>EstCamp</h1>
-<a href="/tickets">See available tickets</a>
-<br/>
-<br/>
-<br/>
-<br/>
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
-{% load bbcode_tags %}
-{% bbcode post %}
+<head>
+    <title>EstCamp</title>
+</head>
+
+<body>
+    <a href="/et">🇪🇪 Eesti</a> / <a href="/en">🇬🇧 English</a>
+    <h1>EstCamp</h1>
+    <a href="{% url 'tickets' %}">{% trans "See available tickets" %}</a>
+    <br/>
+    <br/>
+
+    {% load bbcode_tags %}
+
+    {% if LANGUAGE_CODE == 'et' %}
+        {% bbcode homepage.text_et %}
+    {% else %}
+        {% bbcode homepage.text %}
+    {% endif %}
+</body>

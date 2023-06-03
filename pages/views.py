@@ -8,7 +8,7 @@ from tickets.models import TicketType, Ticket
 
 def home_view(request, *args, **kwargs):
     context = {
-        'post': Homepage.objects.get(pk=1).text,
+        'homepage': Homepage.objects.get(pk=1),
     }
     return render(request, 'index.html', context=context)
 

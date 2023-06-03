@@ -1,30 +1,71 @@
-<h1>EstCamp - Reserve tickets</h1>
-<a href="/">Back to home</a> / <a href="/tickets">See available tickets</a>
-<br/>
-<br/>
-<br/>
-<br/>
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
-{% if reservation %}
-  <div>
-    <p><b>Your reservation has been booked!</b></p>
-    <p>Name: {{ reservation.name }}</p>
-    <p>Email: {{ reservation.email }}</p>
-    <p>Ticket type: {{ reservation.type }}</p>
-    <p>Ticket cost: {{ reservation.type.price }}</p>
-    <br/>
-    <p>Please make the payment to Robert Kuusk at EE1111111111111.</p>
-    <br/>
-    <p>To cancel your reservation, please reach out via email.</p>
-  </div>
-{% else %}
-  <div>
-    <form method="post" novalidate>
-      {% csrf_token %}
-      <table border="1">
-        {{ form }}
-      </table>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-{% endif %}
+<head>
+    <title>EstCamp - {% trans "Reservations" %}</title>
+</head>
+
+<body>
+  <a href="/et/reserve">🇪🇪 Eesti</a> / <a href="/en/reserve">🇬🇧 English</a>
+  <h1>EstCamp - {% trans "Reserve tickets" %}</h1>
+  <a href="{% url 'home' %}">{% trans "Back to home" %}</a> / <a href="{% url 'tickets' %}">{% trans "See available tickets" %}</a>
+  <br/>
+  <br/>
+
+  {% if reservation %}
+    <div>
+      <p><b>{% trans "Your reservation has been booked!" %}</b>
+        <p>
+          {% trans "Name" %}: {{ reservation.name }}<br/>
+          {% trans "E-mail" %}: {{ reservation.email }}<br/>
+          {% if LANGUAGE_CODE == 'et' %}
+            {% trans "Ticket type" %}: {{ reservation.type.name_et }}<br/>
+          {% else %}
+            {% trans "Ticket type" %}: {{ reservation.type.name }}<br/>
+          {% endif %}
+          {% trans "Ticket cost" %}: {{ reservation.type.price }}<br/>
+          <br/>
+          {% trans "Please make the payment to Robert Mattias Kuusk • EE207700771005346153" %}<br/>
+          {% trans "In the description, please include your full name(s)." %}<br/>
+        </p>
+    </div>
+  {% else %}
+    <div>
+      <form method="post">
+        {% csrf_token %}
+        <table style="text-align: right;">
+          <tr>
+            <td><label for="{{ form.name.id_for_label }}">{% trans "Name" %}: </label></td>
+            <td>{{ form.name }}</td>
+            <td>{{ form.name.errors }}</td>
+          </tr>
+          <tr>
+            <td><label for="{{ form.email.id_for_label }}">{% trans "E-mail" %}: </label></td>
+            <td>{{ form.email }}</td>
+            <td>{{ form.email.errors }}</td>
+          </tr>
+          <tr>
+            {{ form.type.errors }}
+            <td><label for="{{ form.type.id_for_label }}">{% trans "Ticket type" %}: </label></td>
+            <td align="left">
+              <select id="{{ form.type.id_for_label }}" name="type">
+                {% for type in available_types %}
+                  <option {% if selected_type == type.id %} selected {% endif %} value="{{ type.id }}">
+                    {% if LANGUAGE_CODE == 'et' %}
+                      {{ type.name_et }}
+                    {% else %}
+                      {{ type.name }}
+                    {% endif %}
+                  </option>
+                {% endfor %}
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" colspan="2"><button type="submit">{% trans "Submit" %}</button></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  {% endif %}
+</body>

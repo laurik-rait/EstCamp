@@ -1,6 +1,5 @@
-from django import forms
 from django.forms import ModelForm, ModelChoiceField
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from reservations.models import Reservation
 from tickets.models import TicketType
@@ -14,8 +13,7 @@ class ReservationForm(ModelForm):
         fields = ["name", "email", "type"]
 
 
-# Create your views here.
-def reservation_view(request, *args, **kwargs):
+def reservation_view(request, type_id=None, *args, **kwargs):
     if request.method == 'POST':
         form = ReservationForm(request.POST)
         if form.is_valid():
@@ -28,7 +26,16 @@ def reservation_view(request, *args, **kwargs):
         'form': form,
     }
 
+    if type_id:
+        context['selected_type'] = type_id
+
     if "reservation" in kwargs:
         context['reservation'] = kwargs.get("reservation")
+    else:
+        available_types = set()
+        for t in TicketType.objects.all():
+            if t.is_available():
+                available_types.add(t)
+        context['available_types'] = available_types
 
     return render(request, 'reserve.html', context=context)

@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from tickets.models import Ticket, TicketType
+from django.utils.translation import gettext as _
 
 
 class Reservation(models.Model):
@@ -18,7 +19,7 @@ class Reservation(models.Model):
     def clean(self, *args, **kwargs):
         if self.pk is None:
             if not self.type.is_available():
-                raise ValidationError("There are no more tickets available for this type.")
+                raise ValidationError(_("There are no more tickets available for this type."))
 
     def __str__(self):
         return f"{self.name} || {self.type.name}"
