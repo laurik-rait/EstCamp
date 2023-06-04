@@ -14,31 +14,33 @@
     <br/>
 
     {% for type, count in available_tickets.items %}
-        <div>
-            <b>
-                {% if LANGUAGE_CODE == 'et' %}
-                    {{ type.name_et }}
-                {% else %}
-                    {{ type.name }}
-                {% endif %} - {{ type.price }}€
-            </b>
+        {% if count > 0 %}
             <div>
-                {% if LANGUAGE_CODE == 'et' %}
-                    {{ type.description_et }}
-                {% else %}
-                    {{ type.description }}
-                {% endif %}
-                <p></p>
-                {% if count < 1 %}
-                    <i>{% trans "Sold out." %}</i>
-                {% else %}
-                    <i>{% blocktrans %}There are currently {{ count }} tickets available!{% endblocktrans %}</i>
-                    <br/>
-                    <a href="{% url 'reservation' type_id=type.id %}"><i>{% trans "Reserve now" %}</i></a>
-                {% endif %}
+                <b>
+                    {% if LANGUAGE_CODE == 'et' %}
+                        {{ type.name_et }}
+                    {% else %}
+                        {{ type.name }}
+                    {% endif %} - {{ type.price }}€
+                </b>
+                <div>
+                    {% if LANGUAGE_CODE == 'et' %}
+                        {{ type.description_et }}
+                    {% else %}
+                        {{ type.description }}
+                    {% endif %}
+                    <p></p>
+                    {% if count < 1 %}
+                        <i>{% trans "Sold out." %}</i>
+                    {% else %}
+                        <i>{% blocktrans %}There are currently {{ count }} tickets available!{% endblocktrans %}</i>
+                        <br/>
+                        <a href="{% url 'reservation' type_id=type.id %}"><i>{% trans "Reserve now" %}</i></a>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-        <br/>
-        <br/>
+            <br/>
+            <br/>
+        {% endif %}
     {% endfor %}
 </body>
